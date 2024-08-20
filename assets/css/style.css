@@ -1,0 +1,10 @@
+:root{
+    --primary-color:#213357
+}
+
+.bg-primary{
+    background-color:var(--primary-color)!important;
+}
+.rounded{
+    border-radius: 0.7rem!important;
+}
