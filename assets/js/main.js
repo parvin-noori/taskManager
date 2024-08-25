@@ -112,4 +112,7 @@ function initializeFormSwitching() {
   }
 }
 
+
+// checked tasks 
+const checkbox=document
 document.addEventListener("DOMContentLoaded", initializeFormSwitching);

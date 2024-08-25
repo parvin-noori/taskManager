@@ -1,9 +1,10 @@
 :root {
   --primary-color: #213357;
+  --gray-bg: #f1f5f9;
 }
-body{
-  &.dashboard{
-    background-color: #f1f5f9;
+body {
+  &.dashboard {
+    background-color: var(--gray-bg);
   }
 }
 .bg-primary {
@@ -24,15 +25,17 @@ body{
     input {
       border-color: red;
     }
-    .errorMessage{
-      color:red;
+    .errorMessage {
+      color: red;
     }
   }
 }
-.form-container.active,
-.switchFormButton.active {
-  display: flex;
-  opacity: 1;
+.form-container,
+.switchFormButton {
+  &.active {
+    display: flex;
+    opacity: 1;
+  }
 }
 
 @media screen and (min-width: 992px) {
@@ -51,5 +54,48 @@ body{
     flex-grow: 1;
     width: 100%;
     border-radius: 0 !important;
+  }
+}
+.form-step {
+  #tasks-tab {
+    background-color: var(--gray-bg);
+    padding: 5px;
+    border-radius: 0.5rem;
+    margin-left: auto;
+    color: gray;
+    .nav-link {
+      color: gray;
+      &.active {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+  .tab-content {
+    .form-check-label {
+      display: block;
+      min-height: 1.5rem;
+      padding-left: 1.5em;
+      margin-bottom: 0.125rem;
+      background-color: var(--gray-bg);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      .form-check-input {
+        margin-left: initial;
+      }
+    }
+  }
+}
+.priarotyLabel {
+  &.low {
+    border: 1px solid gray;
+  }
+  &.md {
+    background-color: black;
+    color: white;
+  }
+  &.high {
+    color: white;
+    background-color: red;
   }
 }
