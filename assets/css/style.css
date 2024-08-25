@@ -16,6 +16,14 @@
 }
 .form-container {
   font-size: 14px;
+  .error {
+    input {
+      border-color: red;
+    }
+    .errorMessage{
+      color:red;
+    }
+  }
 }
 .form-container.active,
 .switchFormButton.active {
