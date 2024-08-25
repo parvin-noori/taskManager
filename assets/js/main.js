@@ -82,7 +82,6 @@ function initializeFormSwitching() {
     showSwitchButton(switchToSignupButton, buttons);
   }
 
-
   //   attach event listeners
   if (switchToSignupButton && signupForm) {
     switchToSignupButton.addEventListener("click", (e) => {
@@ -112,7 +111,22 @@ function initializeFormSwitching() {
   }
 }
 
+// checked tasks
+function CheckboxClassToggler(checkbox) {
+  const targetElement = checkbox.parentElement.querySelector(".task-title");
+  if (targetElement) {
+    if (checkbox.checked) {
+      targetElement.classList.add("text-decoration-line-through");
+    } else {
+      targetElement.classList.remove("text-decoration-line-through");
+    }
+  }
+}
 
-// checked tasks 
-const checkbox=document
+const checkboxes = document.querySelectorAll("input.form-check-input");
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => CheckboxClassToggler(checkbox));
+
+  CheckboxClassToggler(checkbox);
+});
 document.addEventListener("DOMContentLoaded", initializeFormSwitching);
