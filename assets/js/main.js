@@ -130,3 +130,106 @@ checkboxes.forEach((checkbox) => {
   CheckboxClassToggler(checkbox);
 });
 document.addEventListener("DOMContentLoaded", initializeFormSwitching);
+
+function showAddTaskSection(sectionToShow, sections) {
+  sections.forEach((section) => {
+    section.classList.remove("active");
+  });
+  sectionToShow.classList.add("active");
+}
+let tasks = [];
+function initializeTaskStep() {
+  const steps = document.querySelectorAll(".add-task-step");
+  let currentStep = 0;
+
+  showAddTaskSection(steps[currentStep], steps);
+
+  const addTaskButton = document.getElementById("addNewTask");
+  const taskForm = document.getElementById("create-task-form");
+  // //change step to add task
+  addTaskButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    currentStep++;
+    showAddTaskSection(steps[currentStep], steps); // Show the next step
+  });
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const taskFormData = new FormData(taskForm);
+    const formDataObject = {};
+    taskFormData.forEach((value, key) => {
+      formDataObject[key] = value;
+    });
+    tasks.push(formDataObject);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    taskForm.reset();
+    console.log(tasks);
+    currentStep++;
+    showAddTaskSection(steps[currentStep], steps); // Show the next step
+
+    const taskContainer = document.querySelector(".tab-pane.show.active");
+    tasks
+      .map((task) => {
+        const parentDiv = document.createElement("div");
+        parentDiv.className = "d-flex flex-column";
+
+        const labelWrapper = document.createElement("label");
+        labelWrapper.className =
+          "form-check-label w-100 d-flex align-items-center";
+
+        const Titlespan = document.createElement("span");
+        Titlespan.className = "task-title d-block";
+        Titlespan.textContent = task.taskName;
+
+        const dueDateSpan = document.createElement("span");
+        dueDateSpan.className = "text-muted";
+        dueDateSpan.textContent = "Due :" + task.dueDate;
+
+        const prioritySpan = document.createElement("span");
+        prioritySpan.className = "priarotyLabel ms-auto rounded-pill px-3 py-1";
+        switch (task.priaroty) {
+          case "low":
+            prioritySpan.classList.add("low");
+            break;
+          case "high":
+            prioritySpan.classList.add("high");
+            break;
+          case "medium":
+            prioritySpan.classList.add("md");
+            break;
+        }
+
+        prioritySpan.textContent = task.priaroty;
+
+        const formCheckInput = document.createElement("input");
+        formCheckInput.type = "checkbox";
+        formCheckInput.className = "form-check-input me-3";
+        formCheckInput.checked = task.completed;
+        formCheckInput.addEventListener("change", () => {
+          task.completed = formCheckInput.checked;
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+          console.log(task.completed);
+          const taskTitle =
+            formCheckInput.parentElement.querySelector(".task-title");
+          if (formCheckInput.checked) {
+            taskTitle.classList.add("text-decoration-line-through");
+          } else {
+            taskTitle.classList.remove("text-decoration-line-through");
+          }
+        });
+
+        parentDiv.appendChild(Titlespan);
+        parentDiv.appendChild(dueDateSpan);
+
+        labelWrapper.appendChild(formCheckInput);
+        labelWrapper.appendChild(parentDiv);
+        labelWrapper.appendChild(prioritySpan);
+
+        return labelWrapper;
+      })
+      .forEach((label) => {
+        taskContainer.appendChild(label);
+      });
+  });
+}
+document.addEventListener("DOMContentLoaded", initializeTaskStep());

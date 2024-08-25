@@ -16,7 +16,7 @@
         <div class="col-6">
           <div class="shadow-lg bg-white rounded p-4 overflow-hidden">
             <section
-              class="welcomeBox form-step align-items-center d-flex flex-column gap-3"
+              class="welcomeBox add-task-step align-items-center flex-column gap-3"
             >
               <span class="text-capitalize fs-5 fw-semibold"
                 >welcome, jenny!</span
@@ -27,11 +27,12 @@
               <button
                 type="submit"
                 class="text-capitalize btn rounded bg-primary text-white btn"
+                id="addNewTask"
               >
                 add new task
               </button>
             </section>
-            <section class="form-step form-step d-flex flex-column gap-3">
+            <section class="add-task-step form-step flex-column gap-3">
               <div class="btn me-auto shadow-lg rounded">back</div>
               <span class="text-center fs-4 text-capitalize fw-semibold"
                 >create new task</span
@@ -47,6 +48,7 @@
                     id="taskName"
                     name="taskName"
                     placeholder="enter task name"
+                    required
                   />
                   <span class="errorMessage mt-2 d-block"></span>
                 </div>
@@ -60,6 +62,7 @@
                     id="dueDate"
                     name="dueDate"
                     placeholder="due date"
+                    required
                   />
                   <span class="errorMessage mt-2 d-block"></span>
                 </div>
@@ -69,13 +72,15 @@
                   >
                   <select
                     id="priaroty"
+                    name="priaroty"
                     class="form-select rounded"
                     aria-label="priaroty"
+                    required
                   >
                     <option value="" disabled selected>select priaroty</option>
-                    <option value="1">high</option>
-                    <option value="2">medium</option>
-                    <option value="3">low</option>
+                    <option value="high">high</option>
+                    <option value="medium">medium</option>
+                    <option value="low">low</option>
                   </select>
                 </div>
                 <button
@@ -86,7 +91,7 @@
                 </button>
               </form>
             </section>
-            <section class="form-step form-step d-flex flex-column gap-3">
+            <section class="add-task-step form-step flex-column gap-3">
               <nav class="nav nav-pills" id="tasks-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                   <button
@@ -138,24 +143,7 @@
                   role="tabpanel"
                   aria-labelledby="all-tab"
                   tabindex="0"
-                >
-                  <div class="form-check ">
-                    <label class="form-check-label w-100 d-flex align-items-center" for="finishProject">
-                      <input
-                        class="form-check-input me-3"
-                        type="checkbox"
-                        value=""
-                        id="finishProject"
-                        data-target="finishProject"
-                      />
-                      <div class="d-flex flex-column">
-                        <span class="d-block task-title"> finish project proposal</span>
-                        <span class="text-muted">Due:</span>
-                      </div>
-                      <span class="priarotyLabel ms-auto low small rounded-pill px-3 py-1">low</span>
-                    </label>
-                  </div>
-                </div>
+                ></div>
                 <div
                   class="tab-pane fade"
                   id="done-tab"
