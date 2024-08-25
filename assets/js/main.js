@@ -146,6 +146,16 @@ function initializeTaskStep() {
 
   const addTaskButton = document.getElementById("addNewTask");
   const taskForm = document.getElementById("create-task-form");
+  const backBtn = document.getElementById("backStep");
+
+  function prevStep(e) {
+    e.preventDefault();
+    currentStep--;
+    showAddTaskSection(steps[currentStep], steps); // Show the next step
+    taskForm.reset();
+  }
+
+  backBtn.addEventListener("click", (e) => prevStep(e));
   // //change step to add task
   addTaskButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -205,6 +215,9 @@ function initializeTaskStep() {
         formCheckInput.type = "checkbox";
         formCheckInput.className = "form-check-input me-3";
         formCheckInput.checked = task.completed;
+        if (task.completed) {
+          Titlespan.classList.add("text-decoration-line-through");
+        }
         formCheckInput.addEventListener("change", () => {
           task.completed = formCheckInput.checked;
           localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -232,4 +245,5 @@ function initializeTaskStep() {
       });
   });
 }
+
 document.addEventListener("DOMContentLoaded", initializeTaskStep());
