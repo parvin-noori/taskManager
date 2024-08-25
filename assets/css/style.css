@@ -1,7 +1,11 @@
 :root {
   --primary-color: #213357;
 }
-
+body{
+  &.dashboard{
+    background-color: #f1f5f9;
+  }
+}
 .bg-primary {
   background-color: var(--primary-color) !important;
 }

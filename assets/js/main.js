@@ -52,7 +52,7 @@ function handleFormSubmission(e, form) {
     formData.forEach((key, value) => {
       console.log(`${key}: ${value}`);
     });
-    form.reset()
+    form.reset();
   } else {
     // console.log("validate failed");
   }
@@ -65,35 +65,51 @@ function initializeFormSwitching() {
   const switchToSignupButton = document.querySelector("#switchToSignupButton");
   const switchToLoginButton = document.querySelector("#switchToLoginButton");
 
-  const forms = [loginForm, signupForm];
-  const buttons = [switchToSignupButton, switchToLoginButton];
+  const forms = [];
+  const buttons = [];
 
-  //   set initial form
-  showForm(loginForm, forms);
+  // Add forms to array if they exist
+  if (loginForm) forms.push(loginForm);
+  if (signupForm) forms.push(signupForm);
 
-  //   set initial button
-  showSwitchButton(switchToSignupButton, buttons);
+  // Add buttons to array if they exist
+  if (switchToSignupButton) buttons.push(switchToSignupButton);
+  if (switchToLoginButton) buttons.push(switchToLoginButton);
 
-  //   attach event listeners
-  switchToSignupButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    showForm(signupForm, forms);
-    showSwitchButton(switchToLoginButton, buttons);
-  });
-
-  //   attach event listeners
-  switchToLoginButton.addEventListener("click", (e) => {
-    e.preventDefault();
+  // Show initial form and button
+  if (loginForm && switchToSignupButton) {
     showForm(loginForm, forms);
     showSwitchButton(switchToSignupButton, buttons);
-  });
+  }
 
-  loginForm.addEventListener("submit", (e) =>
-    handleFormSubmission(e, loginForm)
-  );
-  signupForm.addEventListener("submit", (e) =>
-    handleFormSubmission(e, signupForm)
-  );
+
+  //   attach event listeners
+  if (switchToSignupButton && signupForm) {
+    switchToSignupButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      showForm(signupForm, forms);
+      showSwitchButton(switchToLoginButton, buttons);
+    });
+  }
+
+  if (switchToLoginButton && loginForm) {
+    switchToLoginButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      showForm(loginForm, forms);
+      showSwitchButton(switchToSignupButton, buttons);
+    });
+  }
+  if (loginForm) {
+    loginForm.addEventListener("submit", (e) =>
+      handleFormSubmission(e, loginForm)
+    );
+  }
+
+  if (signupForm) {
+    signupForm.addEventListener("submit", (e) =>
+      handleFormSubmission(e, signupForm)
+    );
+  }
 }
 
 document.addEventListener("DOMContentLoaded", initializeFormSwitching);
