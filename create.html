@@ -11,11 +11,11 @@
   <body
     class="dashboard w-100 d-flex align-items-sm-center justify-content-sm-center vh-100"
   >
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-12">
-          <div class="shadow-lg bg-white rounded p-4 overflow-hidden">
-            <section class="add-task-step d-flex form-step flex-column gap-3">
+    <div class="container d-flex">
+      <div class="row justify-content-center flex-grow-1">
+        <div class="col-lg-6 col-11 d-flex flex-column">
+          <div class="shadow-lg bg-white rounded p-4 overflow-hidden mt-md-0 my-4 flex-grow-sm d-flex flex-column">
+            <section class="add-task-step d-flex form-step flex-column gap-3 flex-grow-sm">
               <button class="btn me-auto shadow-lg rounded text-gray" id="backStep">
                 <svg class="icon feather-icon" width="20" height="20">
                   <use
@@ -24,10 +24,10 @@
                 </svg>
                 back
               </button>
-              <span class="text-center fs-4 text-capitalize fw-semibold"
+              <span class="text-center fs-4 text-capitalize fw-semibold mt-md-0 mt-5"
                 >create new task</span
               >
-              <form id="create-task-form" class="d-flex flex-column">
+              <form id="create-task-form" class="d-flex flex-column flex-grow-sm">
                 <div class="mb-3">
                   <label for="taskName" class="form-label text-capitalize"
                     >task name</label
@@ -75,7 +75,7 @@
                 </div>
                 <button
                   type="submit"
-                  class="text-capitalize mt-3 btn rounded bg-primary text-white btn ms-auto"
+                  class="text-capitalize mt-3 btn rounded bg-primary text-white btn ms-md-auto mt-md-0 mt-auto"
                 >
                   save task
                 </button>

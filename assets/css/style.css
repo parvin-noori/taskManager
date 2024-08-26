@@ -9,7 +9,7 @@ body {
   }
 }
 .text-gray {
-  color: var(--text-gray)!important;
+  color: var(--text-gray) !important;
 }
 .bg-primary {
   background-color: var(--primary-color) !important;
@@ -58,6 +58,9 @@ body {
     flex-grow: 1;
     width: 100%;
     border-radius: 0 !important;
+  }
+  .flex-grow-sm {
+    flex-grow: 1;
   }
 }
 .form-step {
@@ -118,6 +121,6 @@ input::placeholder,
 input::-moz-placeholder {
   color: var(--text-gray);
 }
-.h-100dvh{
+.h-100dvh {
   height: 100dvh;
 }
