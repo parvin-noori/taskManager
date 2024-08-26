@@ -5,34 +5,31 @@ export let tasks = JSON.parse(localStorage.getItem("tasks"))
   : [];
 
 //task form submission
-if (taskForm) {
-  taskForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+taskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    //form data
-    const formData = new FormData(taskForm);
-    const formDataObj = {};
+  //form data
+  const formData = new FormData(taskForm);
+  const formDataObj = {};
 
-    formData.forEach((value, key) => {
-      formDataObj[key] = value;
-      formDataObj.completed = false;
-    });
-
-    tasks.push(formDataObj);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-
-    taskForm.reset();
-
-    window.location.href = "list.html";
-
+  formData.forEach((value, key) => {
+    formDataObj[key] = value;
+    formDataObj.completed = false;
   });
 
-  //  handle back btn
-  function handleBackBtn(e) {
-    e.preventDefault();
-    taskForm.reset();
-    window.location.href = "index.html";
-  }
+  tasks.push(formDataObj);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 
-  backBtn.addEventListener("click", (e) => handleBackBtn(e));
+  taskForm.reset();
+
+  window.location.href = "list.html";
+});
+
+//  handle back btn
+function handleBackBtn(e) {
+  e.preventDefault();
+  taskForm.reset();
+  window.location.href = "index.html";
 }
+
+backBtn.addEventListener("click", (e) => handleBackBtn(e));
