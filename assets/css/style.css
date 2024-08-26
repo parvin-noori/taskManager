@@ -118,3 +118,6 @@ input::placeholder,
 input::-moz-placeholder {
   color: var(--text-gray);
 }
+.h-100dvh{
+  height: 100dvh;
+}
