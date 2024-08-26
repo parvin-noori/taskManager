@@ -16,7 +16,14 @@
         <div class="col-lg-6 col-12">
           <div class="shadow-lg bg-white rounded p-4 overflow-hidden">
             <section class="add-task-step d-flex form-step flex-column gap-3">
-              <div class="btn me-auto shadow-lg rounded" id="backStep">back</div>
+              <button class="btn me-auto shadow-lg rounded text-gray" id="backStep">
+                <svg class="icon feather-icon" width="20" height="20">
+                  <use
+                    xlink:href="./assets/imgs/symbol-defs.svg#arrow-left"
+                  ></use>
+                </svg>
+                back
+              </button>
               <span class="text-center fs-4 text-capitalize fw-semibold"
                 >create new task</span
               >
@@ -74,7 +81,6 @@
                 </button>
               </form>
             </section>
-           
           </div>
         </div>
       </div>
