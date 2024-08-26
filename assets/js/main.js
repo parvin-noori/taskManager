@@ -129,7 +129,6 @@ checkboxes.forEach((checkbox) => {
 
   CheckboxClassToggler(checkbox);
 });
-document.addEventListener("DOMContentLoaded", initializeFormSwitching);
 
 function showAddTaskSection(sectionToShow, sections) {
   sections.forEach((section) => {
@@ -137,7 +136,6 @@ function showAddTaskSection(sectionToShow, sections) {
   });
   sectionToShow.classList.add("active");
 }
-let tasks = [];
 function initializeTaskStep() {
   const steps = document.querySelectorAll(".add-task-step");
   let currentStep = 0;
@@ -245,5 +243,13 @@ function initializeTaskStep() {
       });
   });
 }
+document.addEventListener("DOMContentLoaded", initializeFormSwitching);
+// document.addEventListener("DOMContentLoaded", initializeTaskStep());
 
-document.addEventListener("DOMContentLoaded", initializeTaskStep());
+
+
+
+
+
+
+

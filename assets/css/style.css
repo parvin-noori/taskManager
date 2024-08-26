@@ -99,12 +99,12 @@ body {
     background-color: red;
   }
 }
-.add-task-step {
+/* .add-task-step {
   display: none;
   &.active {
     display: flex;
   }
-}
+} */
 .tab-pane {
   .form-check-label {
     margin-bottom: 1rem;
