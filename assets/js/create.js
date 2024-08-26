@@ -8,6 +8,8 @@ export let tasks = JSON.parse(localStorage.getItem("tasks"))
 if (taskForm) {
   taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    //form data
     const formData = new FormData(taskForm);
     const formDataObj = {};
 
@@ -23,7 +25,6 @@ if (taskForm) {
 
     window.location.href = "list.html";
 
-    // taskList();
   });
 
   //  handle back btn
