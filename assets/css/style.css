@@ -25,13 +25,14 @@ body {
 }
 .form-container {
   font-size: 14px;
-  .error {
-    input {
-      border-color: red;
-    }
-    .errorMessage {
-      color: red;
-    }
+}
+.error {
+  input {
+    border-color: red;
+  }
+  .errorMessage {
+    color: red;
+    font-size: 14px;
   }
 }
 .form-container,

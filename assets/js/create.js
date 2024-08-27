@@ -18,12 +18,43 @@ if (taskForm) {
       formDataObj.completed = false;
     });
 
-    tasks.push(formDataObj);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    function validateTaskForm(form) {
+      const errorMessageElement =
+        form.querySelector("#taskName").nextElementSibling;
 
-    taskForm.reset();
+      let isValid = true;
 
-    window.location.href = "list.html";
+      // show error message
+      if (
+        errorMessageElement &&
+        errorMessageElement.classList.contains("errorMessage")
+      ) {
+        errorMessageElement.parentElement.classList.add("error"); // Add an error class for styling
+
+        errorMessageElement.textContent = `This task name is duplicate.`;
+      } else {
+        errorMessageElement.parentElement.classList.remove("error");
+        // Hide error message
+        errorMessageElement.textContent = "";
+        errorMessageElement.style.display = "none";
+      }
+      return isValid;
+    }
+
+    // check for duplicate task
+    const isDuplicate = tasks.some(
+      (task) => task.taskName == formDataObj.taskName
+    );
+
+    if (isDuplicate) {
+      console.log("duplicate");
+      validateTaskForm(taskForm);
+    } else {
+      tasks.push(formDataObj);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      taskForm.reset();
+      window.location.href = "list.html";
+    }
   });
   //  handle back btn
   function handleBackBtn(e) {
