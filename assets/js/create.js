@@ -30,7 +30,6 @@ if (taskForm) {
         errorMessageElement.classList.contains("errorMessage")
       ) {
         errorMessageElement.parentElement.classList.add("error"); // Add an error class for styling
-
         errorMessageElement.textContent = `This task name is duplicate.`;
       } else {
         errorMessageElement.parentElement.classList.remove("error");
