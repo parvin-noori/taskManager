@@ -5,6 +5,7 @@ function taskList() {
   console.log(tasks);
 
   const taskContainer = document.querySelector(".tab-pane.show.active");
+  const removeTaskBtn = document.querySelector("remove-task-btn");
 
   tasks
     .map((task) => {
@@ -20,7 +21,7 @@ function taskList() {
       const labelWrapper = document.createElement("label");
       labelWrapper.className =
         "form-check-label w-100 d-flex align-items-center";
-      labelWrapper.setAttribute("id",task.id);
+      labelWrapper.setAttribute("id", task.id);
 
       // create title stpa
       const Titlespan = document.createElement("span");
@@ -51,10 +52,11 @@ function taskList() {
       prioritySpan.textContent = task.priaroty;
 
       // remove task button
-      const removeBtn = document.createElement("button");
-      removeBtn.className = " p-0 border-0 bg-transparent small text-danger";
+      const removeTaskBtn = document.createElement("button");
+      removeTaskBtn.className =
+        " p-0 border-0 bg-transparent small text-danger remove-task-btn";
 
-      removeBtn.textContent = "remove";
+      removeTaskBtn.textContent = "remove";
 
       //create checkbox input
       const formCheckInput = document.createElement("input");
@@ -79,9 +81,15 @@ function taskList() {
         }
       });
 
+      removeTaskBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        const taskId = removeTaskBtn.closest("label").id;
+        console.log(taskId);
+      });
+
       StartParentDiv.appendChild(Titlespan);
       StartParentDiv.appendChild(dueDateSpan);
-      endParentDiv.appendChild(removeBtn);
+      endParentDiv.appendChild(removeTaskBtn);
       endParentDiv.appendChild(prioritySpan);
       labelWrapper.appendChild(formCheckInput);
       labelWrapper.appendChild(StartParentDiv);
@@ -91,5 +99,18 @@ function taskList() {
     .forEach((label) => {
       taskContainer.appendChild(label);
     });
+
+  // if (removeTaskBtn) {
+  //   console.log("s");
+  //   removeTaskBtn.addEventListener("click", function (e) {
+  //     e.preventDefault();
+  //     const taskId = removeTaskBtn.parentElement.id;
+  //     console.log(taskId);
+  //   });
+  // } else {
+  //   removeTaskBtn.addEventListener("click", function (e) {
+  //     console.log("m");
+  //   });
+  // }
 }
 document.addEventListener("DOMContentLoaded", taskList());

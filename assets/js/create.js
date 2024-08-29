@@ -11,14 +11,20 @@ if (taskForm) {
 
     //form data
     const formData = new FormData(taskForm);
-    const formDataObj = {};
 
-    let index = 0;
+    function generateRandomId(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    const formDataObj = {};
     formData.forEach((value, key) => {
       formDataObj[key] = value;
       formDataObj.completed = false;
-      formDataObj.id = `task-${index}`;
-      index++; // افزایش اندیس برای تسک بعدی
+      const sanitizedTaskName = formDataObj.taskName
+        .trim()
+        .replace(/\s+/g, "-")
+        .toLowerCase(); // حذف فضاها و تبدیل به حروف کوچک
+      formDataObj.id = sanitizedTaskName;
     });
 
     function validateTaskForm(form) {
