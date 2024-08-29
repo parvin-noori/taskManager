@@ -42,7 +42,10 @@ body {
     opacity: 1;
   }
 }
-
+.tab-content{
+  max-height: 25rem;
+  overflow-y: auto;
+}
 @media screen and (min-width: 992px) {
   .form-wrapper {
     width: 900px;
