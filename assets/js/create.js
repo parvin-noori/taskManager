@@ -13,9 +13,12 @@ if (taskForm) {
     const formData = new FormData(taskForm);
     const formDataObj = {};
 
+    let index = 0;
     formData.forEach((value, key) => {
       formDataObj[key] = value;
       formDataObj.completed = false;
+      formDataObj.id = `task-${index}`;
+      index++; // افزایش اندیس برای تسک بعدی
     });
 
     function validateTaskForm(form) {

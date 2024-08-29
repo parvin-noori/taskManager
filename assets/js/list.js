@@ -8,13 +8,19 @@ function taskList() {
 
   tasks
     .map((task) => {
-      const parentDiv = document.createElement("div");
-      parentDiv.className = "d-flex flex-column";
+      // start elements parent div
+      const StartParentDiv = document.createElement("div");
+      StartParentDiv.className = "d-flex flex-column";
+
+      // end elements parent div
+      const endParentDiv = document.createElement("div");
+      endParentDiv.className = "d-flex gap-2 ms-auto";
 
       //   create label
       const labelWrapper = document.createElement("label");
       labelWrapper.className =
         "form-check-label w-100 d-flex align-items-center";
+      labelWrapper.setAttribute("id",task.id);
 
       // create title stpa
       const Titlespan = document.createElement("span");
@@ -28,7 +34,7 @@ function taskList() {
 
       //   prioroty span
       const prioritySpan = document.createElement("span");
-      prioritySpan.className = "priarotyLabel ms-auto rounded-pill px-3 py-1";
+      prioritySpan.className = "priarotyLabel  rounded-pill px-3 py-1";
 
       //add specific priority class base it's status
       switch (task.priaroty) {
@@ -43,6 +49,12 @@ function taskList() {
           break;
       }
       prioritySpan.textContent = task.priaroty;
+
+      // remove task button
+      const removeBtn = document.createElement("button");
+      removeBtn.className = " p-0 border-0 bg-transparent small text-danger";
+
+      removeBtn.textContent = "remove";
 
       //create checkbox input
       const formCheckInput = document.createElement("input");
@@ -67,11 +79,13 @@ function taskList() {
         }
       });
 
-      parentDiv.appendChild(Titlespan);
-      parentDiv.appendChild(dueDateSpan);
+      StartParentDiv.appendChild(Titlespan);
+      StartParentDiv.appendChild(dueDateSpan);
+      endParentDiv.appendChild(removeBtn);
+      endParentDiv.appendChild(prioritySpan);
       labelWrapper.appendChild(formCheckInput);
-      labelWrapper.appendChild(parentDiv);
-      labelWrapper.appendChild(prioritySpan);
+      labelWrapper.appendChild(StartParentDiv);
+      labelWrapper.appendChild(endParentDiv);
       return labelWrapper;
     })
     .forEach((label) => {
