@@ -1,5 +1,5 @@
 const taskForm = document.getElementById("create-task-form");
-const backBtn = document.getElementById("backStep");
+export const backBtn = document.getElementById("backStep");
 export let tasks = JSON.parse(localStorage.getItem("tasks"))
   ? JSON.parse(localStorage.getItem("tasks"))
   : [];
@@ -64,12 +64,13 @@ if (taskForm) {
       window.location.href = "list.html";
     }
   });
+  backBtn.addEventListener("click", (e) => handleBackBtn(e, 'index'), taskForm.reset());
+}
   //  handle back btn
-  function handleBackBtn(e) {
+  export function handleBackBtn(e, index) {
     e.preventDefault();
-    taskForm.reset();
-    window.location.href = "index.html";
+   
+    window.location.href = `${index}.html`;
+    console.log()
   }
 
-  backBtn.addEventListener("click", (e) => handleBackBtn(e));
-}

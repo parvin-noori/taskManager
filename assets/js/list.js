@@ -1,21 +1,16 @@
-import { tasks } from "./create.js";
+import { tasks, backBtn, handleBackBtn } from "./create.js";
 
 // dynamic task list
 function taskList() {
   console.log(tasks);
 
   const taskContainer = document.querySelector(".tab-pane.show.active");
-  const removeTaskBtn = document.querySelector("remove-task-btn");
 
   tasks
     .map((task) => {
       // start elements parent div
       const StartParentDiv = document.createElement("div");
       StartParentDiv.className = "d-flex flex-column";
-
-      // end elements parent div
-      const endParentDiv = document.createElement("div");
-      endParentDiv.className = "d-flex gap-2 ms-auto";
 
       //   create label
       const labelWrapper = document.createElement("label");
@@ -35,7 +30,7 @@ function taskList() {
 
       //   prioroty span
       const prioritySpan = document.createElement("span");
-      prioritySpan.className = "priarotyLabel  rounded-pill px-3 py-1";
+      prioritySpan.className = "priarotyLabel ms-auto rounded-pill px-3 py-1";
 
       //add specific priority class base it's status
       switch (task.priaroty) {
@@ -50,13 +45,6 @@ function taskList() {
           break;
       }
       prioritySpan.textContent = task.priaroty;
-
-      // remove task button
-      const removeTaskBtn = document.createElement("button");
-      removeTaskBtn.className =
-        " p-0 border-0 bg-transparent small text-danger remove-task-btn";
-
-      removeTaskBtn.textContent = "remove";
 
       //create checkbox input
       const formCheckInput = document.createElement("input");
@@ -81,36 +69,16 @@ function taskList() {
         }
       });
 
-      removeTaskBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        const taskId = removeTaskBtn.closest("label").id;
-        console.log(taskId);
-      });
-
       StartParentDiv.appendChild(Titlespan);
       StartParentDiv.appendChild(dueDateSpan);
-      endParentDiv.appendChild(removeTaskBtn);
-      endParentDiv.appendChild(prioritySpan);
       labelWrapper.appendChild(formCheckInput);
       labelWrapper.appendChild(StartParentDiv);
-      labelWrapper.appendChild(endParentDiv);
+      labelWrapper.appendChild(prioritySpan);
       return labelWrapper;
     })
     .forEach((label) => {
       taskContainer.appendChild(label);
     });
-
-  // if (removeTaskBtn) {
-  //   console.log("s");
-  //   removeTaskBtn.addEventListener("click", function (e) {
-  //     e.preventDefault();
-  //     const taskId = removeTaskBtn.parentElement.id;
-  //     console.log(taskId);
-  //   });
-  // } else {
-  //   removeTaskBtn.addEventListener("click", function (e) {
-  //     console.log("m");
-  //   });
-  // }
+  backBtn.addEventListener("click", (e) => handleBackBtn(e, "create"));
 }
 document.addEventListener("DOMContentLoaded", taskList());
