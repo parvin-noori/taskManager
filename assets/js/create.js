@@ -40,11 +40,11 @@ if (taskForm) {
     formData.forEach((value, key) => {
       formDataObj[key] = value;
       formDataObj.completed = false;
-      const sanitizedTaskName = formDataObj.taskName
-        .trim()
-        .replace(/\s+/g, "-")
-        .toLowerCase(); // حذف فضاها و تبدیل به حروف کوچک
-      formDataObj.id = sanitizedTaskName;
+      // const sanitizedTaskName = formDataObj.taskName
+      //   .trim()
+      //   .replace(/\s+/g, "-")
+      //   .toLowerCase(); // حذف فضاها و تبدیل به حروف کوچک
+      // formDataObj.id = sanitizedTaskName;
     });
 
     if (validateTaskForm(taskForm)) {
