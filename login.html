@@ -10,8 +10,8 @@
   </head>
   <body class="w-100 d-flex align-items-sm-center justify-content-sm-center h-100dvh">
         <div class="d-flex  flex-column w-100 align-items-center">
-      <div class="form-wrapper shadow-lg rounded overflow-hidden mb-3">
-        <div class="row align-items-stretch">
+      <div class="form-wrapper shadow-lg rounded overflow-hidden mb-3 d-flex flex-column">
+        <div class="row align-items-stretch flex-grow-sm">
           <div class="col-md-6 bg-primary text-white d-md-flex d-none align-items-center justify-content-center task-manager-welcome ">
             <div class=" p-4">
                 <span class="fs-2 fw-semibold mb-4 d-block">Welcome to Task Manager</span>
@@ -23,7 +23,7 @@
                 <span class="fs-5 text-capitalize fw-bold mb-3">login</span>
                 <div class="mb-3">
                     <label for="username" class="form-label">username</label>
-                    <input type="text" class="form-control shadow rounded" id="username" name="username" placeholder="enter your username">
+                    <input type="text" class="form-control shadow rounded" id="username" autocomplete="off" name="username" placeholder="enter your username">
                     <span class="errorMessage mt-2 d-block"></span>
                   </div>
                   <div class="mb-3">
@@ -74,6 +74,6 @@
     <p class="text-muted justify-content-center switchFormButton gap-1">don't have an account?  <a href="#" id="switchToSignupButton"> signup</a></p>
     <p class="text-muted justify-content-center switchFormButton gap-1">already have an account? <a href="#" id="switchToLoginButton"> login</a></p>
     </div>
-    <script src="./assets/js/login.js"></script>
+    <script src="./assets/js/login.js" type="module"></script>
   </body>
 </html>

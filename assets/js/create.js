@@ -1,8 +1,35 @@
+import { showErrorMessage,hideErrorMessage } from "./validateHelper.js";
+
 const taskForm = document.getElementById("create-task-form");
 export const backBtn = document.getElementById("backStep");
 export let tasks = JSON.parse(localStorage.getItem("tasks"))
   ? JSON.parse(localStorage.getItem("tasks"))
   : [];
+
+// Validate task form for duplicates
+function validateTaskForm(form) {
+  let isValid = true;
+  const taskNameInput = form.querySelector("#taskName");
+  const sanitizedTaskName = taskNameInput.value
+    .trim()
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+
+  // Check for duplicate task
+  const isDuplicate = tasks.some((task) => task.id === sanitizedTaskName);
+
+  if (isDuplicate) {
+    showErrorMessage(
+      taskNameInput,
+      "The task with this title already exists. Please enter a unique task name."
+    );
+    isValid = false;
+  } else {
+    hideErrorMessage(taskNameInput);
+  }
+
+  return isValid;
+}
 
 //task form submission
 if (taskForm) {
@@ -11,10 +38,6 @@ if (taskForm) {
 
     //form data
     const formData = new FormData(taskForm);
-
-    function generateRandomId(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
 
     const formDataObj = {};
     formData.forEach((value, key) => {
@@ -27,50 +50,22 @@ if (taskForm) {
       formDataObj.id = sanitizedTaskName;
     });
 
-    function validateTaskForm(form) {
-      const errorMessageElement =
-        form.querySelector("#taskName").nextElementSibling;
-
-      let isValid = true;
-
-      // show error message
-      if (
-        errorMessageElement &&
-        errorMessageElement.classList.contains("errorMessage")
-      ) {
-        errorMessageElement.parentElement.classList.add("error"); // Add an error class for styling
-        errorMessageElement.textContent = `The task with this title already exists. Please enter a unique task name.`;
-      } else {
-        errorMessageElement.parentElement.classList.remove("error");
-        // Hide error message
-        errorMessageElement.textContent = "";
-        errorMessageElement.style.display = "none";
-      }
-      return isValid;
-    }
-
-    // check for duplicate task
-    const isDuplicate = tasks.some(
-      (task) => task.taskName == formDataObj.taskName
-    );
-
-    if (isDuplicate) {
-      console.log("duplicate");
-      validateTaskForm(taskForm);
-    } else {
+    if (validateTaskForm(taskForm)) {
       tasks.push(formDataObj);
       localStorage.setItem("tasks", JSON.stringify(tasks));
       taskForm.reset();
       window.location.href = "list.html";
+    } else {
     }
   });
-  backBtn.addEventListener("click", (e) => handleBackBtn(e, 'index'), taskForm.reset());
+  backBtn.addEventListener(
+    "click",
+    (e) => handleBackBtn(e, "index"),
+    taskForm.reset()
+  );
 }
-  //  handle back btn
-  export function handleBackBtn(e, index) {
-    e.preventDefault();
-   
-    window.location.href = `${index}.html`;
-    console.log()
-  }
-
+//  handle back btn
+export function handleBackBtn(e, href) {
+  e.preventDefault();
+  window.location.href = `${href}.html`;
+}

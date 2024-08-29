@@ -1,7 +1,10 @@
+import { validateForm } from "./validateHelper.js";
+
 // function to show specific form
 function showForm(formToShow, forms) {
   forms.forEach((item) => item.classList.remove("active"));
   formToShow.classList.add("active");
+  formToShow.reset();
 }
 
 // function to show specific switchButton
@@ -10,46 +13,12 @@ function showSwitchButton(buttonToShow, buttons) {
   buttonToShow.parentElement.classList.add("active");
 }
 
-// validate form
-function validateForm(form) {
-  const inputs = form.querySelectorAll("input:not([type='checkbox'])");
-  let isValid = true;
-
-  inputs.forEach((input) => {
-    const errorMessageElement = input.nextElementSibling;
-    if (!input.value.trim()) {
-      input.parentElement.classList.add("error"); // Add an error class for styling
-      isValid = false;
-
-      // show error message
-      if (
-        errorMessageElement &&
-        errorMessageElement.classList.contains("errorMessage")
-      ) {
-        errorMessageElement.textContent = `${input.name} is required.`;
-      }
-    } else {
-      input.parentElement.classList.remove("error");
-      // Hide error message
-      if (
-        errorMessageElement &&
-        errorMessageElement.classList.contains("errorMessage")
-      ) {
-        errorMessageElement.textContent = "";
-        errorMessageElement.style.display = "none";
-      }
-    }
-  });
-
-  return isValid;
-}
 // handle form submission
 function handleFormSubmission(e, form) {
   e.preventDefault();
-
   if (validateForm(form)) {
     const formData = new FormData(form);
-    formData.forEach((key, value) => {
+    formData.forEach((value, key) => {
       console.log(`${key}: ${value}`);
     });
     form.reset();
