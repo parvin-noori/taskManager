@@ -5,6 +5,16 @@ function taskList() {
   console.log(tasks);
 
   const taskContainer = document.querySelector(".tab-pane.show.active");
+  backBtn.addEventListener("click", (e) => handleBackBtn(e, "create"));
+
+  if (tasks.length === 0) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "text-center text-muted mt-3";
+    messageDiv.textContent = "No tasks available";
+
+    taskContainer.appendChild(messageDiv);
+    return; // Exit the function early
+  }
 
   tasks
     .map((task) => {
@@ -79,6 +89,5 @@ function taskList() {
     .forEach((label) => {
       taskContainer.appendChild(label);
     });
-  backBtn.addEventListener("click", (e) => handleBackBtn(e, "create"));
 }
 document.addEventListener("DOMContentLoaded", taskList());
