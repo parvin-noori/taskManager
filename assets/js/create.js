@@ -1,4 +1,4 @@
-import { showErrorMessage,hideErrorMessage } from "./validateHelper.js";
+import { showErrorMessage, hideErrorMessage } from "./validateHelper.js";
 
 const taskForm = document.getElementById("create-task-form");
 export const backBtn = document.getElementById("backStep");
@@ -10,13 +10,10 @@ export let tasks = JSON.parse(localStorage.getItem("tasks"))
 function validateTaskForm(form) {
   let isValid = true;
   const taskNameInput = form.querySelector("#taskName");
-  const sanitizedTaskName = taskNameInput.value
-    .trim()
-    .replace(/\s+/g, "-")
-    .toLowerCase();
+  const sanitizedTaskName = taskNameInput.value;
 
   // Check for duplicate task
-  const isDuplicate = tasks.some((task) => task.id === sanitizedTaskName);
+  const isDuplicate = tasks.some((task) => task.taskName === sanitizedTaskName);
 
   if (isDuplicate) {
     showErrorMessage(
